@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from classes import Elbit
 
 
-elbit = Elbit()
+elbit = Elbit.Elbit()
 url = 'https://elbitsystemscareer.com/'
 categoryClass = "item-practice"
 
