@@ -1,0 +1,6 @@
+request  ~2.4sec
+elapsed - (time from sending the request untill recieving the response) ~0.779953
+[elapsed time is included in the request, where are 1.7 secs?]
+
+
+soup ~ 0.07
