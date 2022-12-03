@@ -12,13 +12,20 @@ class Elbit:
     def scrapeCategory(self, category):
         catLink = category.find('a').get('href')
         self.scrapePage(catLink)
-        print(self.nextPage)
+
+        # If there is more than one page
+        while(self.nextPage):
+            if (self.nextPage):
+                print(self.nextPage)
+                self.scrapePage(self.nextPage)
+                
 
     def scrapePage(self, catLink):
         pageSource = requests.get(catLink, headers={
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}).text
         pageSoup = BeautifulSoup(pageSource, 'html.parser')
 
+        jobCategory = pageSoup.find('h1', class_='page-title').text
         pageJobs = pageSoup.find_all('tr', class_='job-row')
         # print('after find  '+ str(time.perf_counter()))
         for job in pageJobs:
@@ -27,22 +34,22 @@ class Elbit:
             jobLink = 'https://elbitsystemscareer.com' + \
                 job.find('a').get('href')
             jobTitle = job.find('a').string
-
             jobCode = jobColumns[1].string
             jobRegion = jobColumns[2].string
             jobCity = jobColumns[3].contents[0].replace(' ', '')
 
-            jobObject = {'Title': jobTitle,
-                         'Code': jobCode,
-                         'Link': jobLink,
-                         'Region': jobRegion,
-                         'City': jobCity}
+            jobObject = {
+                'Title': jobTitle,
+                'Job Category': jobCategory,
+                'Code': jobCode,
+                'Link': jobLink,
+                'Region': jobRegion,
+                'City': jobCity
+            }
 
-
-            
             # Inside job description page
             # For now not in use
-            # 
+            #
             # jdSource = requests.get(jobLink, headers={
             #     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}).text
             # jdSoup = BeautifulSoup(jdSource, 'html.parser')
@@ -55,7 +62,6 @@ class Elbit:
             #     for div in jbJobBoxDvis:
             #         jbJobBoxText.append(div.text)
             #     jobObject[jbJobBoxHeader] = jbJobBoxText
-
 
             # Add to global job array
             self.allJobs.append(jobObject)
@@ -72,5 +78,3 @@ class Elbit:
         allJobsDf = pd.DataFrame(self.allJobs)
         allJobsDf.to_csv('jobs.csv', encoding='utf-8-sig')
         print('Ending page')
-
-
