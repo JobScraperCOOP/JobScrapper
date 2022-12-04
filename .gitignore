@@ -2,3 +2,4 @@ venv
 jobs.csv
 test.html
 test.py
+jobs.db

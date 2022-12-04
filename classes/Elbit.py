@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 import time
+from db.db import session
+from db.Job import Job
 
 
 class Elbit:
@@ -14,11 +16,13 @@ class Elbit:
         self.scrapePage(catLink)
 
         # If there is more than one page
-        while(self.nextPage):
+        # while(self.nextPage):
+        #     if (self.nextPage):
+        #         print(self.nextPage)
+        #         self.scrapePage(self.nextPage)
+        for i in range(1):
             if (self.nextPage):
-                print(self.nextPage)
                 self.scrapePage(self.nextPage)
-                
 
     def scrapePage(self, catLink):
         pageSource = requests.get(catLink, headers={
@@ -46,6 +50,16 @@ class Elbit:
                 'Region': jobRegion,
                 'City': jobCity
             }
+
+            # Add to db
+            try:
+                job = Job(jobTitle, jobCategory, jobCode,
+                        jobLink, jobRegion, jobCity)
+                session.add(job)
+                session.commit()
+            except Exception:
+                # Send to logger**
+                print(Exception)
 
             # Inside job description page
             # For now not in use
