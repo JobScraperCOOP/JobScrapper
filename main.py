@@ -14,6 +14,14 @@ soup = BeautifulSoup(source, 'html.parser')
 
 categories = soup.find_all('div', class_=categoryClass)
 
-for i in range(1):
-    print(i)
-    elbit.scrapeCategory(categories[i])
+
+
+
+
+
+# ==================RUN====================
+for cat in categories:
+    elbit.scrapeCategory(cat)
+# for i in range(1):
+#     print(i)
+#     elbit.scrapeCategory(categories[i])

@@ -2,8 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 import time
-from db.db import session
 from db.Job import Job
+from db.db import session
+
 
 
 class Elbit:
@@ -16,13 +17,13 @@ class Elbit:
         self.scrapePage(catLink)
 
         # If there is more than one page
-        # while(self.nextPage):
-        #     if (self.nextPage):
-        #         print(self.nextPage)
-        #         self.scrapePage(self.nextPage)
-        for i in range(1):
+        while(self.nextPage):
             if (self.nextPage):
+                print(self.nextPage)
                 self.scrapePage(self.nextPage)
+        # for i in range(1):
+        #     if (self.nextPage):
+        #         self.scrapePage(self.nextPage)
 
     def scrapePage(self, catLink):
         pageSource = requests.get(catLink, headers={
@@ -48,18 +49,20 @@ class Elbit:
                 'Code': jobCode,
                 'Link': jobLink,
                 'Region': jobRegion,
-                'City': jobCity
+                'City': jobCity,
+                'Last Updated':time.time()
             }
 
             # Add to db
             try:
                 job = Job(jobTitle, jobCategory, jobCode,
-                        jobLink, jobRegion, jobCity)
+                        jobLink, jobRegion, jobCity,time.time())
                 session.add(job)
                 session.commit()
-            except Exception:
+            except Exception as err:
                 # Send to logger**
-                print(Exception)
+                print(err)
+                session.rollback()
 
             # Inside job description page
             # For now not in use
@@ -90,5 +93,5 @@ class Elbit:
 
         # Export to CSV later DB
         allJobsDf = pd.DataFrame(self.allJobs)
-        allJobsDf.to_csv('jobs.csv', encoding='utf-8-sig')
+        # allJobsDf.to_csv('jobs.csv', encoding='utf-8-sig')
         print('Ending page')

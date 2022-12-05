@@ -1,1 +1,2 @@
 1. When scraping job details page, relying on divs for the text of the boxes doesnt give all of the text
+2. Difference between export to db and csv shows 1 job difference
