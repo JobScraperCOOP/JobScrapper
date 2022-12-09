@@ -1,27 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
-from classes import Elbit
+from classes import Elbit,Iai,Refael
+import time
 
 
-elbit = Elbit.Elbit()
-url = 'https://elbitsystemscareer.com/'
-categoryClass = "item-practice"
+# elbit = Elbit.Elbit()
+# elbit.scrapeAllCategories()
 
-source = requests.get(
-    url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}).text
-
-soup = BeautifulSoup(source, 'html.parser')
-
-categories = soup.find_all('div', class_=categoryClass)
+# iai = Iai.Iai()
+# iai.scrapeAllJobs()
 
 
+# refael = Refael.Refael()
+# refael.scrapeAllJobs()
 
+print(time.process_time())
 
 
 
-# ==================RUN====================
-for cat in categories:
-    elbit.scrapeCategory(cat)
-# for i in range(1):
-#     print(i)
-#     elbit.scrapeCategory(categories[i])
+
+
+

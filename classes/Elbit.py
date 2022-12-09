@@ -6,33 +6,49 @@ from db.Job import Job
 from db.db import session
 
 
-
 class Elbit:
     def __init__(self):
         self.allJobs = []
         self.nextPage = ''
+        
+        self.url = 'https://elbitsystemscareer.com/'
+        self.categoryClass = "item-practice"
+        self.categories = []
 
-    def scrapeCategory(self, category):
-        catLink = category.find('a').get('href')
-        self.scrapePage(catLink)
+        self.getCategories()
 
+
+    def getCategories(self):
+        source = requests.get(
+            self.url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}).text
+
+        soup = BeautifulSoup(source, 'html.parser')
+        categories = soup.find_all('div', class_=self.categoryClass)
+
+        for category in categories:
+            self.categories.append(category.find('a').get('href'))
+
+    def scrapeAllCategories(self):
+        for category in self.categories: 
+            print("starting to scrape:  " + category)
+            self.scrapeCategory(category)
+
+    def scrapeCategory(self, link):
+        self.scrapePage(link)
         # If there is more than one page
         while(self.nextPage):
-            if (self.nextPage):
-                print(self.nextPage)
-                self.scrapePage(self.nextPage)
-        # for i in range(1):
-        #     if (self.nextPage):
-        #         self.scrapePage(self.nextPage)
+            print(self.nextPage)
+            self.scrapePage(self.nextPage)
+                
 
-    def scrapePage(self, catLink):
-        pageSource = requests.get(catLink, headers={
+    def scrapePage(self, link):
+        pageSource = requests.get(link, headers={
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}).text
         pageSoup = BeautifulSoup(pageSource, 'html.parser')
 
         jobCategory = pageSoup.find('h1', class_='page-title').text
         pageJobs = pageSoup.find_all('tr', class_='job-row')
-        # print('after find  '+ str(time.perf_counter()))
+        
         for job in pageJobs:
             jobColumns = job.find_all('td')
 

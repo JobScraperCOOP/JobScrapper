@@ -12,7 +12,7 @@ class Job(Base):
     index = Column('index', Integer, index=True, primary_key=True)
     title = Column('title', String)
     jobCategory = Column('category', String)
-    code = Column('code', String, unique=True)
+    code = Column('code', String, unique=True, nullable=False)
     link = Column('link', String)
     region = Column('region', String)
     city = Column('city', String)
