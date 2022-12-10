@@ -2,6 +2,6 @@ venv
 jobs.csv
 test.html
 test.py
-jobs.db
-chromedriver.exe
-__pycache__
+*.db
+*.csv
+.idea
