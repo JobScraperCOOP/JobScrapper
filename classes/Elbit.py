@@ -2,16 +2,19 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 import time
+
+from classes.JobProvider import JobProvider
 from db.Job import Job
 from db.db import session
 
 
-class Elbit:
+class Elbit(JobProvider):
     def __init__(self):
+        super().__init__()
         self.allJobs = []
         self.nextPage = ''
         
-        self.url = 'https://elbitsystemscareer.com/'
+        self.base_url = 'https://elbitsystemscareer.com/'
         self.categoryClass = "item-practice"
         self.categories = []
 
@@ -20,7 +23,7 @@ class Elbit:
 
     def getCategories(self):
         source = requests.get(
-            self.url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}).text
+            self.base_url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}).text
 
         soup = BeautifulSoup(source, 'html.parser')
         categories = soup.find_all('div', class_=self.categoryClass)

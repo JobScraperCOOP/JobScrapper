@@ -6,16 +6,18 @@ from selenium.webdriver.chrome.options import Options
 import time
 
 import pandas as pd
+
+from classes.JobProvider import JobProvider
 from db.Job import Job
 from db.db import session
 
 
-class Refael:
+class Refael(JobProvider):
     def __init__(self):
+        super().__init__()
         self.allJobs = []
-        self.nextPage = "https://career.rafael.co.il/search/1/"
-
-        self.url = 'https://career.rafael.co.il/search/1/'
+        self.base_url = 'https://career.rafael.co.il/search/1/'
+        self.nextPage = self.base_url
         self.browser = self.create_browser('../chromedriver')
 
     def create_browser(self, webdriver_path):
@@ -40,7 +42,7 @@ class Refael:
         
 
     def scrapeAllJobs(self):
-        self.scrapePage(self.url)
+        self.scrapePage(self.base_url)
         # If there is more than one page
         while (self.nextPage):
             print("before scraping" + self.nextPage)

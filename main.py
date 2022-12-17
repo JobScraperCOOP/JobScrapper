@@ -1,6 +1,3 @@
-import requests
-from bs4 import BeautifulSoup
-from classes import Elbit,Iai,Refael
 import time
 
 
@@ -13,6 +10,8 @@ import time
 
 # refael = Refael.Refael()
 # refael.scrapeAllJobs()
+
+
 
 print(time.process_time())
 
