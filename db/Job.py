@@ -33,3 +33,21 @@ Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
+
+
+
+
+# CREATE TABLE `heroku_f01bf6ee851e78d`.`new_table` (
+#   `index` INT NOT NULL AUTO_INCREMENT,
+#   `title` VARCHAR(45) NULL,
+#   `category` VARCHAR(45) NULL,
+#   `code` VARCHAR(45) NOT NULL,
+#   `link` VARCHAR(45) NULL,
+#   `region` VARCHAR(45) NULL,
+#   `city` VARCHAR(45) NULL,
+#   `last_update` FLOAT NULL,
+#   PRIMARY KEY (`index`),
+#   UNIQUE INDEX `code_UNIQUE` (`code` ASC))
+# ENGINE = InnoDB
+# DEFAULT CHARACTER SET = utf8
+# COLLATE = utf8_unicode_ci;

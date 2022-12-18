@@ -4,15 +4,14 @@ from classes import Elbit,Iai,Refael
 import time
 
 
-# elbit = Elbit.Elbit()
-# elbit.scrapeAllCategories()
+elbit = Elbit.Elbit()
+elbit.scrapeAllCategories()
 
-# iai = Iai.Iai()
-# iai.scrapeAllJobs()
+iai = Iai.Iai()
+iai.scrapeAllJobs()
 
-
-# refael = Refael.Refael()
-# refael.scrapeAllJobs()
+refael = Refael.Refael()
+refael.scrapeAllJobs()
 
 print(time.process_time())
 
