@@ -1,19 +1,19 @@
-import time
+from classes.Company import Company
+from classes.Context import Context
+from classes.EngineActions.ScrapeJobEntries import ScrapeJobEntries
 
 
-# elbit = Elbit.Elbit()
-# elbit.scrapeAllCategories()
+def run_engine():
+    companies = [company for company in Company]
+    engine_actions = [ScrapeJobEntries]
 
-# iai = Iai.Iai()
-# iai.scrapeAllJobs()
-
-
-# refael = Refael.Refael()
-# refael.scrapeAllJobs()
+    context = Context(companies)
+    for action in engine_actions:
+        action.perform(context)
 
 
-
-print(time.process_time())
+if __name__ == "__main__":
+    run_engine()
 
 
 

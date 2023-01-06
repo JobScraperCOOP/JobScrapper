@@ -5,10 +5,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import time
 
-import pandas as pd
-
 from classes.JobProvider import JobProvider
-from db.Job import Job
+from db.models.Job import Job
 from db.db import session
 
 
@@ -18,7 +16,7 @@ class Refael(JobProvider):
         self.allJobs = []
         self.base_url = 'https://career.rafael.co.il/search/1/'
         self.nextPage = self.base_url
-        self.browser = self.create_browser('../chromedriver')
+        #self.browser = self.create_browser('../chromedriver')
 
     def create_browser(self, webdriver_path):
         # create a selenium object that mimics the browser
