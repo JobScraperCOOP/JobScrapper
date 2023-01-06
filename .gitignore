@@ -1,8 +1,11 @@
 venv
-jobs.csv
 test.html
 test.py
 *.db
 *.csv
 .idea
-*.pyc
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
