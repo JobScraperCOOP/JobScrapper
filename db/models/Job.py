@@ -11,16 +11,16 @@ class Job(Base):
 
     index = Column('index', Integer, index=True, primary_key=True)
     title = Column('title', String)
-    jobCategory = Column('category', String)
+    job_category = Column('category', String)
     code = Column('code', String, unique=True, nullable=False)
     link = Column('link', String)
     region = Column('region', String)
     city = Column('city', String)
     lastUpdated = Column('last_update',FLOAT)
 
-    def __init__(self, title, jobCategory, code, link, region, city, lastUpdated):
+    def __init__(self, title, job_category, code, link, region, city, lastUpdated):
         self.title = title
-        self.jobCategory = jobCategory
+        self.job_category = job_category
         self.code = code
         self.link = link
         self.region = region

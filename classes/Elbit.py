@@ -4,7 +4,7 @@ import pandas as pd
 import time
 
 from classes.JobProvider import JobProvider
-from db.Job import Job
+from db.models.Job import Job
 from db.db import session
 
 
@@ -18,7 +18,7 @@ class Elbit(JobProvider):
         self.categoryClass = "item-practice"
         self.categories = []
 
-        self.getCategories()
+        #self.getCategories()
 
 
     def getCategories(self):

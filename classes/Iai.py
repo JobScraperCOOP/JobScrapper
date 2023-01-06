@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 
 from classes.JobProvider import JobProvider
-from db.Job import Job
+from db.models.Job import Job
 from db.db import session
 
 
@@ -17,7 +17,7 @@ class Iai(JobProvider):
         self.base_url = 'https://jobs.iai.co.il/jobs/'
         self.nextPage = self.base_url + '?pg=1'
 
-        self.browser = self.create_browser('../chromedriver')
+        #self.browser = self.create_browser('../chromedriver')
 
     def create_browser(self, webdriver_path):
         # create a selenium object that mimics the browser
