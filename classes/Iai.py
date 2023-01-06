@@ -5,17 +5,18 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import time
 
-import pandas as pd
+from classes.JobProvider import JobProvider
 from db.Job import Job
 from db.db import session
 
 
-class Iai:
+class Iai(JobProvider):
     def __init__(self):
+        super().__init__()
         self.allJobs = []
-        self.nextPage = "https://jobs.iai.co.il/jobs/?pg=1"
+        self.base_url = 'https://jobs.iai.co.il/jobs/'
+        self.nextPage = self.base_url + '?pg=1'
 
-        self.url = 'https://jobs.iai.co.il/jobs/'
         self.browser = self.create_browser('../chromedriver')
 
     def create_browser(self, webdriver_path):
@@ -40,7 +41,7 @@ class Iai:
         print(self.nextPage)
 
     def scrapeAllJobs(self):
-        self.scrapePage(self.url)
+        self.scrapePage(self.base_url)
         # If there is more than one page
         while (self.nextPage):
             print(self.nextPage)
