@@ -60,6 +60,9 @@ class Refael:
             link = item.find_element(By.TAG_NAME, 'a').get_attribute('href')
 
             code = link.split('/')[4]
+            if (code == ''):
+                continue
+
             city = item.find_element(
                 By.XPATH, '//div[1]/div[1]/ul/li[3]').text
             jobType = item.find_element(

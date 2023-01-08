@@ -87,7 +87,7 @@ class Iai:
                 session.rollback()
 
         # Check if next page is available
-        xpath_next_arrow = '//*[@id="jobs-section"]/div[3]/nav/ul/li[47]'
+        xpath_next_arrow = '//*[@id="jobs-section"]/div[3]/nav/ul/li[last()]'
         
         class_of_next_arrow = WebDriverWait(self.browser, 10).until(
                 EC.presence_of_element_located((By.XPATH, xpath_next_arrow))).get_attribute('class')

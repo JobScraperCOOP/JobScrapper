@@ -11,8 +11,8 @@ port = ''
 url = 'mysql://'+username+':'+password+'@'+host+'/'+dbname
 
 print(url)
-# engine = create_engine('sqlite:///jobs.db', echo=False)
-engine = create_engine(url, echo=False)
+engine = create_engine('sqlite:///jobs.db', echo=False)
+# engine = create_engine(url, echo=False)
 Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
