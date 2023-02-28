@@ -1,8 +1,14 @@
 venv
-jobs.csv
 test.html
 test.py
-jobs.db
-chromedriver.exe
-__pycache__
 
+chromedriver.exe
+
+*.db
+*.csv
+.idea
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class

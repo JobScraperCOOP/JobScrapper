@@ -1,26 +1,21 @@
-import requests
-from bs4 import BeautifulSoup
-from classes import Elbit,Iai,Refael
-import time
+from classes.Company import Company
+from classes.Context import Context
+from classes.EngineActions.ScrapeJobEntries import ScrapeJobEntries
+import logging 
+
+def run_engine():
+    logging.basicConfig(level=logging.INFO, filename='log.log', filemode='w')
+    
+    companies = [company for company in Company]
+    engine_actions = [ScrapeJobEntries]
+
+    context = Context(companies)
+    for action in engine_actions:
+        action.perform(context)
 
 
-elbit = Elbit.Elbit()
-elbit.scrapeAllCategories()
-print("Done with elbit:")
-print(time.process_time())
-
-
-iai = Iai.Iai()
-iai.scrapeAllJobs()
-print("Done with iai:")
-print(time.process_time())
-
-
-# refael = Refael.Refael()
-# refael.scrapeAllJobs()
-# print("Done with refael:")
-# print(time.process_time())
-
+if __name__ == "__main__":
+    run_engine()
 
 
 

@@ -15,5 +15,8 @@ engine = create_engine('sqlite:///jobs.db', echo=False)
 # engine = create_engine(url, echo=False)
 Base.metadata.create_all(bind=engine)
 
+
+# 
+# Check why not removed
 Session = sessionmaker(bind=engine)
 session = Session()
