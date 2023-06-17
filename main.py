@@ -3,6 +3,7 @@ from classes.Context import Context
 from classes.EngineActions.ScrapeJobEntries import ScrapeJobEntries
 import logging 
 
+
 def run_engine():
     logging.basicConfig(level=logging.INFO, filename='log.log', filemode='w')
     

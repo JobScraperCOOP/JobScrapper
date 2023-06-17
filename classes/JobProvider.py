@@ -6,6 +6,7 @@ import logging
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 
+
 class JobProvider:
     def __init__(self):
         self.base_url = None
